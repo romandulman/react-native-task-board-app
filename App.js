@@ -30,6 +30,8 @@ export default class App extends Component<Props> {
                         menu: { labels: ['Item 1', 'Item 2'] },
                     }}
                 />
+                <AddTask/>
+
                 <Maingrid ref="addNewGuest" />
             </View>
         );
