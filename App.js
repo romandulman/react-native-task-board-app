@@ -7,10 +7,14 @@ import { Button } from 'react-native-material-ui';
 
 type Props = {};
 export default class App extends Component<Props> {
-
+state={
+    showDialog : false
+};
     showAddGuestHandler = () =>{
       //  this.refs.addNew.handleShow();
-        alert();
+        this.setState({showDialog: true})
+
+        //alert();
     };
 
     addHandler = (Name,Body) =>{
@@ -30,7 +34,7 @@ export default class App extends Component<Props> {
                         menu: { labels: ['Item 1', 'Item 2'] },
                     }}
                 />
-                <AddTask/>
+                 { this.state.showDialog && <AddTask/> }
 
                 <Maingrid ref="addNewGuest" />
             </View>

@@ -4,7 +4,7 @@ import { Dialog, DialogDefaultActions } from 'react-native-material-ui';
 
 export default class AddNewTask extends Component<Props> {
     state = {
-        show: false,
+        show: true,
         Name: '',
         Body: ''
     };
@@ -12,12 +12,14 @@ export default class AddNewTask extends Component<Props> {
     handleShow = () => {
         this.setState({ show: true });
     };
-
+ handleCancel = () =>{
+     this.setState({show: false})
+ }
 
     render() {
         return (
             <View style={styles.container}>
-                <Dialog >
+                {this.state.show && <Dialog >
                     <Dialog.Title><Text>Hello world</Text></Dialog.Title>
                     <Dialog.Content>
                         <Text>
@@ -31,10 +33,10 @@ export default class AddNewTask extends Component<Props> {
                             * this will disable the button for "ok"
                             */
                             options={{ ok: { disabled: true } }}
-                            onActionPress={() => {}}
+                            onActionPress={this.handleCancel}
                         />
                     </Dialog.Actions>
-                </Dialog>
+                </Dialog> }
             </View>
         );
     }
