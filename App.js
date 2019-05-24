@@ -1,41 +1,35 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,ScrollView} from 'react-native';
+import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native';
 import Maingrid from './components/TaskNotesGrid';
 import AddTask from './components/AddNewTask'
-import { Toolbar } from 'react-native-material-ui';
-import { Button } from 'react-native-material-ui';
+import {Toolbar} from 'react-native-material-ui';
 
 type Props = {};
 export default class App extends Component<Props> {
-state={
-    showDialog : false
-};
-    showAddGuestHandler = () =>{
-      this.refs.addNew.handleShow();
-       // this.setState({showDialog: true})
 
+    showAddTaskHandler = () =>{
+      this.refs.addNew.handleShow();
     };
 
-    addHandler = (Name,Body) =>{
-        this.refs.addNewTask.addOne(Name,Body)
+    addHandler = (Task,DateTime) =>{
+        this.refs.addNewTask.addHandler(Task,DateTime)
     };
 
     render() {
         return (
-            <View  style={styles.container}>
+            <View style={styles.container}>
                 <Toolbar
-
-                    onLeftElementPress={this.showAddGuestHandler}
+                    onLeftElementPress={this.showAddTaskHandler}
                     addHandler={this.addHandler}
                     leftElement='add'
                     centerElement="My Task Board"
                     rightElement={{
-                        menu: { labels: ['Item 1', 'Item 2'] },
+                        menu: { labels: ['Exit'] },
                     }}
                 />
-                  <AddTask ref="addNew" />
+                  <AddTask addHandler={this.addHandler} ref="addNew" />
 
-                <Maingrid ref="addNewGuest" />
+                <Maingrid ref="addNewTask" />
             </View>
         );
     }
@@ -47,17 +41,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-
-
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 });

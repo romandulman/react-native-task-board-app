@@ -1,35 +1,43 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,ScrollView,AppRegistry} from 'react-native';
+import {Platform, StyleSheet, Text, View, ScrollView, AppRegistry} from 'react-native';
 import TaskNote from './TaskNote';
+import {AsyncStorage} from 'react-native';
 
 export default class TaskNotesGrid extends Component<Props> {
-    state ={
-
+    state = {
+        data: []
     };
 
-
-    addOne = (Name, Body) => {
-        const data = this.state.data;
+    addHandler = (task, DateTime) => {
         let arr = {
-            Name: Name,
-            Body: Body
+            Task: task,
+            dateTime: DateTime
         };
-        data.push(arr);
+        this.setState({
+                data: [...this.state.data, arr]
+            }//,
+            // () => AsyncStorage.setItem("TASKS", JSON.stringify(this.state.data))
+        );
+        AsyncStorage.setItem("TASKS", JSON.stringify(this.state.data))
+
+    };
+    RemoveTaskHandler = (id) => {
+        const data = this.state.data;
+        data.splice(id, 1);
         this.setState({data});
-        //  console.log(data);
     };
 
     render() {
         return (
-            <ScrollView >
+            <ScrollView>
+                <View style={styles.container}>
+                    {
+                        this.state.data.map((notes, index) =>
 
-                <TaskNote task='ddd' date='19/02/1989' time='19:00'/>
-                <TaskNote task='ddd' date='19/02/1989' time='19:00'/>
-                <TaskNote task='ddd' date='19/02/1989' time='19:00'/>
-                <TaskNote task='ddd' date='19/02/1989' time='19:00'/>
-                <TaskNote task='ddd' date='19/02/1989' time='19:00'/>
-
-
+                            <TaskNote key={index} Id={index} RemoveTaskHandler={this.RemoveTaskHandler}
+                                      Task={notes.Task} DateTime={String(notes.DateTime)}/>
+                        )
+                    }</View>
             </ScrollView>
         );
     }
@@ -38,9 +46,11 @@ AppRegistry.registerComponent('TaskNotesGrid', () => TaskNotesGrid);
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
+        flex: 1,
+        marginTop: 10,
         flexDirection: 'row',
         flexWrap: 'wrap',
+        marginLeft: 25,
     },
 
 });
