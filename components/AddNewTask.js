@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View,ScrollView,AppRegistry} from 'react-native';
 import { Dialog, DialogDefaultActions } from 'react-native-material-ui';
+import { TextField } from 'react-native-material-textfield';
 
 export default class AddNewTask extends Component<Props> {
     state = {
         show: true,
-        Name: '',
-        Body: ''
+        Task: '',
+        DateTime: ''
     };
 
     handleShow = () => {
@@ -14,25 +15,28 @@ export default class AddNewTask extends Component<Props> {
     };
  handleCancel = () =>{
      this.setState({show: false})
- }
+ };
 
     render() {
+        let { Task } = this.state;
+
         return (
             <View style={styles.container}>
                 {this.state.show && <Dialog >
-                    <Dialog.Title><Text>Hello world</Text></Dialog.Title>
+                    <Dialog.Title><Text>Add New Task</Text></Dialog.Title>
                     <Dialog.Content>
-                        <Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Text>
+                        <TextField
+                            label='Task text'
+                            value={Task}
+                            onChangeText={ (Task) => this.setState({ Task }) }
+                        />
+
                     </Dialog.Content>
                     <Dialog.Actions>
                         <DialogDefaultActions
                             actions={['cancel', 'ok']}
-                            /**
-                            * this will disable the button for "ok"
-                            */
-                            options={{ ok: { disabled: true } }}
+
+                            options={{ ok: { disabled: false } }}
                             onActionPress={this.handleCancel}
                         />
                     </Dialog.Actions>

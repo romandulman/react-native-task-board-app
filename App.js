@@ -11,10 +11,9 @@ state={
     showDialog : false
 };
     showAddGuestHandler = () =>{
-      //  this.refs.addNew.handleShow();
-        this.setState({showDialog: true})
+      this.refs.addNew.handleShow();
+       // this.setState({showDialog: true})
 
-        //alert();
     };
 
     addHandler = (Name,Body) =>{
@@ -25,7 +24,7 @@ state={
         return (
             <View  style={styles.container}>
                 <Toolbar
-                    ref="addNew"
+
                     onLeftElementPress={this.showAddGuestHandler}
                     addHandler={this.addHandler}
                     leftElement='add'
@@ -34,7 +33,7 @@ state={
                         menu: { labels: ['Item 1', 'Item 2'] },
                     }}
                 />
-                 { this.state.showDialog && <AddTask/> }
+                  <AddTask ref="addNew" />
 
                 <Maingrid ref="addNewGuest" />
             </View>
