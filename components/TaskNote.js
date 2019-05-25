@@ -18,20 +18,46 @@ export default class TaskNote extends Component<Props> {
                 <Button accent text="Remove" onPress={this.handleRemove}/>
                 <ImageBackground
                     source={require('./images/sticky-note1.png')}
-                    style={{width: 159, height: 150, backgroundRepeat: 'no-repeat', backgroundSize: 'stretch'}}
+                    style={{width: 169, height: 160, backgroundRepeat: 'no-repeat', backgroundSize: 'stretch'}}
                 >
-                    <Text>Task:{this.props.Task}</Text>
-                    <Text>Time:{this.props.DateTime}</Text>
+                    <Text style={styles.titlesText}>Task:</Text>
+                    <ScrollView>
+                        <Text style={styles.TaskText}>{this.props.Task}</Text>
+                    </ScrollView>
+                    <Text style={styles.titlesText}>Date & Time:</Text>
+                    <Text style={styles.DateTimeText}>{this.props.DateTime}</Text>
                 </ImageBackground>
             </View>
         );
     }
 }
+
 AppRegistry.registerComponent('TaskNote', () => TaskNote);
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#F5FCFF',
         margin: 5,
+        padding: 5,
+        height: 200,
+        width: 170
     },
+
+    titlesText:{
+        fontSize: 16,
+        fontWeight: "500",
+        marginLeft: 5
+    },
+
+    TaskText:{
+        fontSize: 12,
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+        margin: 5,
+    },
+    DateTimeText:{
+        fontSize: 13,
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+        margin: 5,
+        maxWidth: 120
+    }
 });

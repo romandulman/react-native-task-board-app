@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView, AppRegistry} from 'react-native';
 import TaskNote from './TaskNote';
-import {AsyncStorage} from 'react-native';
 
 export default class TaskNotesGrid extends Component<Props> {
     state = {
@@ -11,14 +10,9 @@ export default class TaskNotesGrid extends Component<Props> {
     addHandler = (task, DateTime) => {
         let arr = {
             Task: task,
-            dateTime: DateTime
+            DateTime: DateTime
         };
-        this.setState({
-                data: [...this.state.data, arr]
-            }//,
-            // () => AsyncStorage.setItem("TASKS", JSON.stringify(this.state.data))
-        );
-        AsyncStorage.setItem("TASKS", JSON.stringify(this.state.data))
+        this.setState({ data: [...this.state.data, arr] });
 
     };
     RemoveTaskHandler = (id) => {
@@ -30,6 +24,8 @@ export default class TaskNotesGrid extends Component<Props> {
     render() {
         return (
             <ScrollView>
+                <View>
+                </View>
                 <View style={styles.container}>
                     {
                         this.state.data.map((notes, index) =>
@@ -37,7 +33,8 @@ export default class TaskNotesGrid extends Component<Props> {
                             <TaskNote key={index} Id={index} RemoveTaskHandler={this.RemoveTaskHandler}
                                       Task={notes.Task} DateTime={String(notes.DateTime)}/>
                         )
-                    }</View>
+                    }
+                    </View>
             </ScrollView>
         );
     }
@@ -52,5 +49,4 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         marginLeft: 25,
     },
-
 });
