@@ -42,7 +42,6 @@ export default class AddNewTask extends Component<Props> {
 
     render() {
         let {Task} = this.state;
-
         return (
             <View style={styles.container}>
                 {this.state.show && <Dialog>
