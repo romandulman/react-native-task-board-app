@@ -22,7 +22,7 @@ export default class App extends Component<Props> {
                     onLeftElementPress={this.showAddTaskHandler}
                     addHandler={this.addHandler}
                     leftElement='add'
-                    centerElement="My  Task Board"
+                    centerElement="My Task Board"
                     rightElement={{
                         menu: { labels: ['Exit'] },
                     }}
